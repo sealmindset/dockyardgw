@@ -1,0 +1,39 @@
+# =============================================================================
+# Dockyard Gateway -- Terraform Variables
+# Copy this file to terraform.tfvars and fill in your values.
+# =============================================================================
+
+project_name = "Dockyard Gateway"
+project_slug = "dockyardgw"
+location     = "southcentralus"
+environment  = "prod"
+
+# Docker Hub credentials (optional -- avoids Docker Hub anonymous rate limits)
+# Create a personal access token at https://hub.docker.com/settings/security
+# dockerhub_username = "your-dockerhub-username"
+# dockerhub_token    = "dckr_pat_xxxxxxxxxxxx"
+
+# Azure AD group object IDs -- get these from Azure Portal > Azure AD > Groups
+# Admins: can push images, approve quarantined images, manage the registry
+acr_admin_group_object_ids = [
+  # "00000000-0000-0000-0000-000000000000"  # Platform Engineering group
+]
+
+# Pullers: can pull images from the registry (typically an all-company group)
+acr_pull_group_object_ids = [
+  # "00000000-0000-0000-0000-000000000000"  # All Employees group
+]
+
+# Monitoring
+log_retention_days = 90
+
+# Alert recipients (email addresses notified when images are blocked)
+alert_email_addresses = [
+  # "platform-team@company.com"
+]
+
+# Resource tags
+tags = {
+  cost_center = ""
+  team        = "platform-engineering"
+}
