@@ -2,6 +2,22 @@
 
 All notable changes to Dockyard Gateway will be documented in this file.
 
+## [1.1.0] - 2026-04-02
+
+### Added
+- `enable_rbac` and `enable_policy` toggle variables for sandbox deployments without elevated permissions
+- NEXT-STEPS.md shareable checklist for team onboarding
+
+### Fixed
+- Docker Hub cache rules now require authenticated credentials (Azure enforcement change) -- rules only created when Docker Hub token is provided
+- Monitor metric alert window size increased to PT1H (Azure requires minimum PT1H for StorageUsed metric)
+
+### Verified
+- Deployed to sn-ai-sbx-01 sandbox subscription
+- MCR proxy cache tested: pulled azure-cli:latest successfully
+- GHCR proxy cache tested: pulled actions-runner:latest successfully
+- Both images cached and served from dockyardgwprod.azurecr.io
+
 ## [1.0.0] - 2026-04-02
 
 ### Added

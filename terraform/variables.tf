@@ -88,6 +88,18 @@ variable "blocked_severity_levels" {
   default     = ["Critical", "High"]
 }
 
+variable "enable_rbac" {
+  description = "Enable RBAC role assignments (requires Microsoft.Authorization/roleAssignments/write)"
+  type        = bool
+  default     = true
+}
+
+variable "enable_policy" {
+  description = "Enable Azure Policy assignments (requires Microsoft.Authorization/policyAssignments/write)"
+  type        = bool
+  default     = true
+}
+
 variable "tags" {
   description = "Tags applied to all resources"
   type        = map(string)

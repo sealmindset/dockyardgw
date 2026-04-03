@@ -64,8 +64,8 @@ resource "azurerm_monitor_metric_alert" "pull_failures" {
   scopes              = [var.acr_id]
   description         = "Alerts when container image pulls fail, which may indicate blocked images due to vulnerability findings."
   severity            = 2
-  frequency           = "PT5M"
-  window_size         = "PT15M"
+  frequency           = "PT1H"
+  window_size         = "PT1H"
   tags                = var.tags
 
   criteria {

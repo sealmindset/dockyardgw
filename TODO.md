@@ -1,11 +1,12 @@
 # TODO
 
 ## Before First Deploy
-- [ ] Get Azure AD group object IDs for admin and all-users groups
-- [ ] Fill in `terraform.tfvars` with group IDs and alert email addresses
-- [ ] (Optional) Create Docker Hub personal access token for authenticated pulls
-- [ ] Run `bootstrap-tfstate.sh` and uncomment the backend block in `backend.tf`
-- [ ] Run `terraform plan` to review, then `terraform apply`
+- [x] ~~Get Azure AD group object IDs for admin and all-users groups~~
+- [x] ~~Fill in `terraform.tfvars` with group IDs and alert email addresses~~
+- [x] ~~Run `terraform plan` to review, then `terraform apply`~~ (deployed to sn-ai-sbx-01)
+- [ ] Get Owner or User Access Administrator role on target subscription (needed for RBAC + Policy modules)
+- [ ] Create Docker Hub personal access token for authenticated pulls (required for Docker Hub proxy cache)
+- [ ] Run `bootstrap-tfstate.sh` and uncomment the backend block in `backend.tf` for team collaboration
 
 ## After Deploy
 - [ ] Test user onboarding with `onboard-user.sh`

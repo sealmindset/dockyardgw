@@ -117,20 +117,26 @@ resource "azurerm_key_vault_secret" "dockerhub_token" {
 # caches the image, and serves it to the user from Azure.
 # ---------------------------------------------------------------------------
 
+# Docker Hub cache rules require authenticated credentials (Azure enforces this).
+# These are only created when Docker Hub credentials are provided.
 resource "azurerm_container_registry_cache_rule" "dockerhub_library" {
+  count = var.dockerhub_username != "" && var.dockerhub_token != "" ? 1 : 0
+
   name                  = "docker-hub-library"
   container_registry_id = azurerm_container_registry.main.id
   target_repo           = "docker.io/library/*"
   source_repo           = "docker.io/library/*"
-  credential_set_id     = length(azurerm_container_registry_credential_set.dockerhub) > 0 ? azurerm_container_registry_credential_set.dockerhub[0].id : null
+  credential_set_id     = azurerm_container_registry_credential_set.dockerhub[0].id
 }
 
 resource "azurerm_container_registry_cache_rule" "dockerhub_community" {
+  count = var.dockerhub_username != "" && var.dockerhub_token != "" ? 1 : 0
+
   name                  = "docker-hub-community"
   container_registry_id = azurerm_container_registry.main.id
   target_repo           = "docker.io/*"
   source_repo           = "docker.io/*"
-  credential_set_id     = length(azurerm_container_registry_credential_set.dockerhub) > 0 ? azurerm_container_registry_credential_set.dockerhub[0].id : null
+  credential_set_id     = azurerm_container_registry_credential_set.dockerhub[0].id
 }
 
 # Microsoft Container Registry (for .NET, Azure tools, etc.)

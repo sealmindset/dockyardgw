@@ -58,8 +58,11 @@ module "defender" {
 
 # ---------------------------------------------------------------------------
 # Policy Module -- Block Critical/High, Quarantine Medium/Low
+# Requires Microsoft.Authorization/policyAssignments/write permission.
+# Set enable_policy = false to skip if your role lacks this permission.
 # ---------------------------------------------------------------------------
 module "policy" {
+  count  = var.enable_policy ? 1 : 0
   source = "./modules/policy"
 
   resource_group_name = azurerm_resource_group.main.name
@@ -70,8 +73,11 @@ module "policy" {
 
 # ---------------------------------------------------------------------------
 # RBAC Module -- Access Controls
+# Requires Microsoft.Authorization/roleAssignments/write permission.
+# Set enable_rbac = false to skip if your role lacks this permission.
 # ---------------------------------------------------------------------------
 module "rbac" {
+  count  = var.enable_rbac ? 1 : 0
   source = "./modules/rbac"
 
   acr_id                     = module.acr.acr_id
